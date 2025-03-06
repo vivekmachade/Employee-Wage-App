@@ -1,32 +1,32 @@
 function getWorkingHours(empCheck) {
-    switch(empCheck) {
-        case isPartTime:
-            empHrs = PartTimeHours;
-            break;
-        case isFullTime:
-            empHrs = FullTimeHours;
-            break;
-        default:
-            empHrs = 0;
-    }
     
-    let empWage = empHrs * WagesPerHour;
+    let empWage = Math.floor(Math.random() * 10);
     return empWage;
 }
 
-const TotalWorkingDays = 20;
-let empHrs = 0;
+function calcDailyWage(empHrs) {
 
-const isPartTime = 1;
-const isFullTime = 2;
-const PartTimeHours = 4;
-const FullTimeHours = 8;
-const WagesPerHour = 20;
-
-for(let day = 1; day <= TotalWorkingDays; day++) {
-    let empCheck = Math.floor(Math.random() * 10) % 3;
-    empHrs += getWorkingHours(empCheck);
+    let WagesPerHour = 20;
+    return empHrs * WagesPerHour;
 }
 
-let empWage = empHrs * WagesPerHour;
-console.log("Total Hrs: " + empHrs + " Employee Wage: " + empWage);d
+const maximumHours = 160;
+const workingDays = 20;
+let totalEmpHrs = 0;
+let totalWorkingDays = 0;
+let empDailyWageArr = new Array();
+
+while(totalEmpHrs <= maximumHours && totalWorkingDays < workingDays) {
+    totalWorkingDays++;
+
+    let empCheck = Math.floor(Math.random() * 10) % 3;
+    let empHrs = getWorkingHours(empCheck);
+
+    totalEmpHrs += empHrs;
+    empDailyWageArr.push(calcDailyWage(empHrs));
+}
+
+let empWage = calcDailyWage(totalEmpHrs);
+
+console.log("Total Days: " + totalWorkingDays + " Total Hours: " + totalEmpHrs + " Employee Wage: " + empWage);
+console.log("arr: " + empDailyWageArr);
